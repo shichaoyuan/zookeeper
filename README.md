@@ -1,3 +1,8 @@
+由于 3.4 版本已经停止维护，但是存在 Java 21 不兼容的地方，如果升级客户端版本又有服务端不兼容的问题。
+
+所以这里 fork 了 branch-3.4 分支，对 Java 21 进行了兼容修复。
+
+---------------------------
 For the latest information about ZooKeeper, please visit our website at:
 
    http://zookeeper.apache.org/
