@@ -120,24 +120,27 @@ public final class StaticHostProvider implements HostProvider {
         if (addr == null) {
             return hostString;
         }
-        if (!addr.isUnresolved()) {
-            InetAddress ia = addr.getAddress();
+//        if (!addr.isUnresolved()) {
+//            InetAddress ia = addr.getAddress();
+//
+//            // If the string starts with '/', then it has no hostname
+//            // and we want to avoid the reverse lookup, so we return
+//            // the string representation of the address.
+//            if (ia.toString().startsWith("/")) {
+//                hostString = ia.getHostAddress();
+//            } else {
+//                hostString = addr.getHostName();
+//            }
+//        } else {
+//            // According to the Java 6 documentation, if the hostname is
+//            // unresolved, then the string before the colon is the hostname.
+//            String addrString = addr.toString();
+//            hostString = addrString.substring(0, addrString.lastIndexOf(':'));
+//        }
 
-            // If the string starts with '/', then it has no hostname
-            // and we want to avoid the reverse lookup, so we return
-            // the string representation of the address.
-            if (ia.toString().startsWith("/")) {
-                hostString = ia.getHostAddress();
-            } else {
-                hostString = addr.getHostName();
-            }
-        } else {
-            // According to the Java 6 documentation, if the hostname is
-            // unresolved, then the string before the colon is the hostname.
-            String addrString = addr.toString();
-            hostString = addrString.substring(0, addrString.lastIndexOf(':'));
-        }
-
+        // The above logic executes abnormally in Java 14+ because the return value of InetSocketAddress.toString() is changed to "127.0.0.1/<unresolved>:2181".
+        // Since our Java versions are all in 8+, we directly use the getHostString method added in version 7 instead.
+        hostString = addr.getHostString();
         return hostString;
     }
 

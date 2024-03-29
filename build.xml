@@ -81,8 +81,8 @@ xmlns:cs="antlib:com.puppycrawl.tools.checkstyle">
     <property name="revision.properties" value="revision.properties" />
     <property file="${basedir}/.revision/${revision.properties}" />
     
-    <property name="javac.target" value="1.6" />
-    <property name="javac.source" value="1.6" />
+    <property name="javac.target" value="1.8" />
+    <property name="javac.source" value="1.8" />
 
     <property name="src.dir" value="${basedir}/src" />
     <property name="java.server.src.dir" value="${basedir}/zookeeper-server/src/main/java" />
